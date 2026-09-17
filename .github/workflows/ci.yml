@@ -32,6 +32,9 @@ jobs:
       - name: 测试（全离线，无需任何 API key）
         run: npm test
 
+      - name: 评测集（防幻觉主线指标，全离线）
+        run: npm run eval
+
       - name: 构建
         run: npm run build
 

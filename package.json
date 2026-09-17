@@ -20,7 +20,7 @@
   "bin": {
     "aether-research": "./dist/cli.js"
   },
-  "files": ["dist", "README.md", "LICENSE"],
+  "files": ["dist", "README.md", "LICENSE", "EVAL.md", "CHANGELOG.md", "CONTRIBUTING.md"],
   "engines": {
     "node": ">=22.5.0"
   },
@@ -30,6 +30,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "eval": "vitest run eval/",
     "prepublishOnly": "npm run typecheck && npm run test && npm run build"
   },
   "dependencies": {
