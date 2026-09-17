@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["22"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 类型检查
+        run: npm run typecheck
+
+      - name: 测试（全离线，无需任何 API key）
+        run: npm test
+
+      - name: 构建
+        run: npm run build
+
+      - name: CLI 冒烟
+        run: node dist/cli.js providers
+
+  emoji-scan:
+    name: P0 门禁 - 禁止 emoji 作功能图标
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 扫描产出中的 emoji
+        run: |
+          if grep -rnP '[\x{1F300}-\x{1F9FF}\x{2600}-\x{26FF}\x{2700}-\x{27BF}\x{1FA00}-\x{1FAFF}\x{FE0F}]' \
+               src/ tests/ examples/ README.md; then
+            echo "::error::发现 emoji。UI 图标必须使用内联 SVG（lucide-static），不得使用 emoji。"
+            exit 1
+          fi
+          echo "未发现 emoji"
