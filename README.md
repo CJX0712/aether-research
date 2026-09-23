@@ -1,5 +1,12 @@
 # aether-research
 
+<p align="center">
+  <a href="https://github.com/CJX0712/aether-research/actions/workflows/ci.yml"><img src="https://github.com/CJX0712/aether-research/actions/workflows/ci.yml/badge.svg" alt="ci"></a>
+  <a href="https://github.com/CJX0712/aether-research/releases"><img src="https://img.shields.io/github/v/release/CJX0712/aether-research?sort=semver" alt="release"></a>
+  <a href="https://github.com/CJX0712/aether-research/blob/main/LICENSE"><img src="https://img.shields.io/github/license/CJX0712/aether-research" alt="license"></a>
+  <img src="https://img.shields.io/badge/author-%E6%99%A8%E6%98%9F-1f6feb" alt="author">
+</p>
+
 **可审计的深度研究。** 一条声明如果没有逐字出处，它就不该出现在报告里。
 
 TypeScript · Node 22 · 构建在 [AetherFlow](https://github.com/CJX0712/aetherflow) 之上。
