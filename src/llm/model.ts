@@ -112,7 +112,8 @@ export function createLlm(registry: ModelRegistry, model: string, onUsage?: Usag
     ): Promise<
       { ok: true; value: T; costUsd: number } | { ok: false; error: Error; costUsd: number }
     > {
-      const jsonSchema = toJsonSchema(schema);
+      // zod 3.25 的 ZodType 泛型与 aetherflow 内联的 ZodTypeAny 结构不兼容，此处做最小类型桥接。
+      const jsonSchema = toJsonSchema(schema as never);
       const systemParts = [request.system, canNativeJson ? "" : schemaHint(jsonSchema)].filter(
         (part) => part && part.length > 0,
       );
